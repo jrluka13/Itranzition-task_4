@@ -36,7 +36,7 @@ export const Auth = () => {
       console.log(dataDb[key].mail);
       if (dataDb[key].mail === mail && dataDb[key].password === password) {
         dataDb[key].dateOFLastLogin = new Date();
-        dataDb[key].status = "online"
+        dataDb[key].isLogin = true
         link.href = "/main";
         console.log(dataDb[key]);
         axios

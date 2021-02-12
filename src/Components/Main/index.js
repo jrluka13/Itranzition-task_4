@@ -45,11 +45,11 @@ export const Main = () => {
   };
 
   const BlockHundler = () => {
-    for(let str in trueItems){
-      if(trueItems[str]["data"]["status"] === "online"){
-        console.log(trueItems[str]["data"]["status"])
-        trueItems[str]["data"]["status"] = "block"
-
+    for (let str in trueItems) {
+      if (trueItems[str]["data"]["isLogin"] === true) {
+        // console.log(trueItems[str]["data"]["status"]);
+        trueItems[str]["data"]["status"] = "block";
+        trueItems[str]["data"]["isLogin"] = false
         axios
           .put(
             `https://webapp-9da92-default-rtdb.firebaseio.com/users/${trueItems[str]["data"]["key"]}.json`,
@@ -62,12 +62,10 @@ export const Main = () => {
           .catch((err) => {
             console.log(err);
           });
-      }else{
+      } else {
+        trueItems[str]["data"]["status"] = "block";
 
-        trueItems[str]["data"]["status"] = "block"
-
-
-         axios
+        axios
           .put(
             `https://webapp-9da92-default-rtdb.firebaseio.com/users/${trueItems[str]["data"]["key"]}.json`,
             trueItems[str]["data"]
@@ -80,32 +78,24 @@ export const Main = () => {
             console.log(err);
           });
       }
-
     }
   };
   const UnBlockHundler = () => {
-    for(let str in trueItems){
-      if(trueItems[str]["data"]["status"] === "online"){
-        console.log(trueItems[str]["data"]["status"])
-      }else{
+    for (let str in trueItems) {
+      trueItems[str]["data"]["status"] = "unblock";
 
-        trueItems[str]["data"]["status"] = "unblock"
-
-
-         axios
-          .put(
-            `https://webapp-9da92-default-rtdb.firebaseio.com/users/${trueItems[str]["data"]["key"]}.json`,
-            trueItems[str]["data"]
-          )
-          .then((response) => {
-            console.log(response);
-            document.location.href = "http://localhost:3000/main";
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-
+      axios
+        .put(
+          `https://webapp-9da92-default-rtdb.firebaseio.com/users/${trueItems[str]["data"]["key"]}.json`,
+          trueItems[str]["data"]
+        )
+        .then((response) => {
+          console.log(response);
+          document.location.href = "http://localhost:3000/main";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 

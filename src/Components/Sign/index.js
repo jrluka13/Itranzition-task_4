@@ -37,6 +37,7 @@ export const Sign = () => {
       dateOfSign: new Date(),
       dateOFLastLogin:'',
       status:'unblock',
+      isLogin:false
     }
     axios.post('https://webapp-9da92-default-rtdb.firebaseio.com/users.json',data)
     .then(response=>{
